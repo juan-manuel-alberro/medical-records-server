@@ -1,15 +1,22 @@
 language: node_js
 node_js:
-  - "4.4"
-  - "6.2"
+- '4.4.7'
+sudo: false
 services:
   - mongodb
+before_script:
+  - npm prune && npm install -g gulp
+after_script:
+  - npm run report-coverage
+script: gulp mocha
+notifications:
+  email: true
+after_failure: cat /home/travis/build/juan-manuel-alberro/medical-records-server/npm-debug.log
+branches:
+  only:
+  - master
 cache:
   directories:
   - node_modules
 git:
   depth: 3
-before_script:
-  - npm prune
-after_script:
-  - npm run report-coverage
