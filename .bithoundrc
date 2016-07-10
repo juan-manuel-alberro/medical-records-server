@@ -1,0 +1,10 @@
+{
+  "packageJsonLocation": "package.json",
+  "critics": {
+    "wc": {"limit": 1000},
+    "lint": {"engine": "eslint"}
+  },
+  "test": [
+    "**/tests/**"
+  ]
+}

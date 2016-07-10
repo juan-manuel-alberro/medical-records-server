@@ -61,11 +61,13 @@ function list(req, res, next) {
   const {
     limit = 50, skip = 0
   } = req.query;
+
   User.list({
-      limit,
-      skip
-    }).then((users) => res.json(users))
-    .error((e) => next(e));
+    limit,
+    skip
+  })
+  .then((users) => res.json(users))
+  .error((e) => next(e));
 }
 
 /**
