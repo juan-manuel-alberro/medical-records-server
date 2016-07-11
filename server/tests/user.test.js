@@ -1,12 +1,7 @@
 import request from 'supertest-as-promised';
 import httpStatus from 'http-status';
-import chai from 'chai';
-import {
-  expect
-} from 'chai';
+import {expect} from 'chai';
 import app from '../../index';
-
-chai.config.includeStack = true;
 
 describe('## User APIs', () => {
   let user = {
@@ -32,7 +27,7 @@ describe('## User APIs', () => {
   describe('# GET /api/users/:userId', () => {
     it('should get user details', (done) => {
       request(app)
-        .get(`/api/users/${user._id}`)
+        .get(`/api/users/${user._id}`) // eslint-disable-line
         .expect(httpStatus.OK)
         .then(res => {
           expect(res.body.username).to.equal(user.username);
@@ -41,7 +36,7 @@ describe('## User APIs', () => {
         });
     });
 
-    it('should report error with message - Not found, when user does not exists', (done) => {
+    it('should report error - Not found, if user not exists', (done) => {
       request(app)
         .get('/api/users/56c787ccc67fc16ccc1a5e92')
         .expect(httpStatus.NOT_FOUND)
@@ -56,7 +51,7 @@ describe('## User APIs', () => {
     it('should update user details', (done) => {
       user.username = 'KK';
       request(app)
-        .put(`/api/users/${user._id}`)
+        .put(`/api/users/${user._id}`) // eslint-disable-line
         .send(user)
         .expect(httpStatus.OK)
         .then(res => {
@@ -82,7 +77,7 @@ describe('## User APIs', () => {
   describe('# DELETE /api/users/', () => {
     it('should delete user', (done) => {
       request(app)
-        .delete(`/api/users/${user._id}`)
+        .delete(`/api/users/${user._id}`) // eslint-disable-line
         .expect(httpStatus.OK)
         .then(res => {
           expect(res.body.username).to.equal('KK');

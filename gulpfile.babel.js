@@ -114,46 +114,48 @@ gulp.task('test', ['pre-test', 'set-env'], () => {
   let exitCode = 0;
 
   if (plugins.util.env['code-coverage-reporter']) {
-    reporters = [...options.codeCoverage.reporters, plugins.util.env['code-coverage-reporter']];
+    reporters = [...options.codeCoverage.reporters,
+      plugins.util.env['code-coverage-reporter']];
   } else {
     reporters = options.codeCoverage.reporters;
   }
 
   return gulp.src([paths.tests], {
-      read: false
-    })
-    .pipe(plugins.plumber())
-    .pipe(plugins.mocha({
-      reporter: plugins.util.env['mocha-reporter'] || 'spec',
-      ui: 'bdd',
-      timeout: 6000,
-      compilers: {
-        js: babelCompiler
-      }
-    }))
-    .once('error', (err) => {
-      plugins.util.log(err);
-      exitCode = 1;
-    })
-    // Creating the reports after execution of test cases
-    .pipe(plugins.istanbul.writeReports({
-      dir: './coverage',
-      reporters
-    }))
-    // Enforce test coverage
-    .pipe(plugins.istanbul.enforceThresholds({
-      thresholds: options.codeCoverage.thresholds
-    }))
-    .once('end', () => {
-      plugins.util.log('completed !!');
-      process.exit(exitCode);
-    });
+    read: false
+  })
+  .pipe(plugins.plumber())
+  .pipe(plugins.mocha({
+    reporter: plugins.util.env['mocha-reporter'] || 'spec',
+    ui: 'bdd',
+    timeout: 6000,
+    compilers: {
+      js: babelCompiler
+    }
+  }))
+  .once('error', (err) => {
+    plugins.util.log(err);
+    exitCode = 1;
+  })
+  // Creating the reports after execution of test cases
+  .pipe(plugins.istanbul.writeReports({
+    dir: './coverage',
+    reporters
+  }))
+  // Enforce test coverage
+  .pipe(plugins.istanbul.enforceThresholds({
+    thresholds: options.codeCoverage.thresholds
+  }))
+  .once('end', () => {
+    plugins.util.log('completed !!');
+    process.exit(exitCode);
+  });
 });
 
 // clean dist, compile js files, copy non-js files and execute tests
 gulp.task('mocha', ['clean'], () => {
   runSequence(
     ['copy', 'babel'],
+    'lint',
     'test'
   );
 });
