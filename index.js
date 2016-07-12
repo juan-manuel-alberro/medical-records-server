@@ -18,7 +18,7 @@ mongoose.connection.on('error', () => {
   throw new Error(`unable to connect to database: ${config.db}`);
 });
 
-const debug = require('debug')('express-mongoose-es6-rest-api:index');
+const debug = require('debug')('index');
 
 // listen on port config.port
 app.listen(config.port, () => {

@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:KunalKapadia/express-mongoose-es6-rest-api.git"
+    "url": "git@github.com:juan-manuel-alberro/medical-records-server.git"
   },
   "keywords": [
     "express",
