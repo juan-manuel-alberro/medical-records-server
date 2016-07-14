@@ -27,6 +27,15 @@ describe('## Interview APIs', () => {
           done();
         });
     });
+
+    it('should fail when create a new interview', (done) => {
+      const emptyInterview = undefined;
+      request(app)
+        .post('/api/interviews')
+        .send(emptyInterview)
+        .expect(httpStatus.BAD_REQUEST)
+        .then(() => done());
+    });
   });
 
   describe('# GET /api/interviews/:interviewId', () => {
@@ -69,6 +78,15 @@ describe('## Interview APIs', () => {
           expect(res.body.visit).to.deep.equal(interview.visit);
           done();
         });
+    });
+
+    it('should fail when update a interview', (done) => {
+      const emptyInterview = undefined;
+      request(app)
+        .get('/api/interviews/1234567890')
+        .send(emptyInterview)
+        .expect(httpStatus.INTERNAL_SERVER_ERROR)
+        .then(() => done());
     });
   });
 
