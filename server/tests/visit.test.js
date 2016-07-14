@@ -27,6 +27,14 @@ describe('## Visit APIs', () => {
           done();
         });
     });
+    it('should fail when create a new visit', (done) => {
+      const emptyVisit = undefined;
+      request(app)
+        .post('/api/visits')
+        .send(emptyVisit)
+        .expect(httpStatus.BAD_REQUEST)
+        .then(() => done());
+    });
   });
 
   describe('# GET /api/visits/:visitId', () => {
@@ -70,6 +78,15 @@ describe('## Visit APIs', () => {
           expect(res.body.patient).to.deep.equal(visit.patient);
           done();
         });
+    });
+
+    it('should fail when update a visit', (done) => {
+      const emptyVisit = undefined;
+      request(app)
+        .get('/api/visits/1234567890')
+        .send(emptyVisit)
+        .expect(httpStatus.INTERNAL_SERVER_ERROR)
+        .then(() => done());
     });
   });
 
