@@ -8,7 +8,7 @@
   "root": true,
   "rules": {
     "prefer-rest-params": 0,
-    "comma-dangle": ["error", "never"],
+    "comma-dangle": [2, "never"],
     "object-curly-spacing": [2, "never"],
     "no-unused-vars": 1,
   },
