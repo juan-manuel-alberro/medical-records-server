@@ -1,6 +1,8 @@
 import request from 'supertest-as-promised';
 import httpStatus from 'http-status';
 import {expect} from 'chai';
+import proxyquire from 'proxyquire';
+import mongoose from 'mongoose';
 
 import app from '../../index';
 
@@ -28,6 +30,29 @@ describe('## Misc', () => {
         });
     });
   });
+
+  // describe('# Token validations', () => {
+  //   let appMock = {};
+  //   before(() => {
+  //     mongoose.disconnect();
+  //     const customConfig = {
+  //       env: 'test',
+  //       db: 'mongodb://localhost/mrdb-qa',
+  //       port: 3000,
+  //       salt: 'abc123putos',
+  //       unsecureUrls: []
+  //     };
+  //
+  //     appMock = proxyquire('../../index', {'./config/env': customConfig});
+  //   });
+  //
+  //   it('should return 401 since no token was sent', (done) => {
+  //     request(appMock)
+  //       .get('/api/users')
+  //       .expect(httpStatus.UNAUTHORIZE)
+  //       .then(() => done());
+  //   });
+  // });
 
   describe('# Error Handling', () => {
     it('should handle mongoose CastError - Cast to ObjectId failed', (done) => {

@@ -6,7 +6,7 @@ import app from '../../index';
 describe('## User APIs', () => {
   let user = {
     username: 'KK123',
-    mobileNumber: '1234567890'
+    pass: '1234567890'
   };
 
   describe('# POST /api/users', () => {
@@ -17,7 +17,7 @@ describe('## User APIs', () => {
         .expect(httpStatus.OK)
         .then(res => {
           expect(res.body.username).to.equal(user.username);
-          expect(res.body.mobileNumber).to.equal(user.mobileNumber);
+          expect(res.body.pass).to.equal(user.pass);
           user = res.body;
           done();
         });
@@ -31,7 +31,7 @@ describe('## User APIs', () => {
         .expect(httpStatus.OK)
         .then(res => {
           expect(res.body.username).to.equal(user.username);
-          expect(res.body.mobileNumber).to.equal(user.mobileNumber);
+          expect(res.body.pass).to.equal(user.pass);
           done();
         });
     });
@@ -56,7 +56,7 @@ describe('## User APIs', () => {
         .expect(httpStatus.OK)
         .then(res => {
           expect(res.body.username).to.equal('KK');
-          expect(res.body.mobileNumber).to.equal(user.mobileNumber);
+          expect(res.body.pass).to.equal(user.pass);
           done();
         });
     });
@@ -81,7 +81,7 @@ describe('## User APIs', () => {
         .expect(httpStatus.OK)
         .then(res => {
           expect(res.body.username).to.equal('KK');
-          expect(res.body.mobileNumber).to.equal(user.mobileNumber);
+          expect(res.body.pass).to.equal(user.pass);
           done();
         });
     });

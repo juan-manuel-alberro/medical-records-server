@@ -11,12 +11,17 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  mobileNumber: {
+  pass: {
     type: String,
-    required: true,
-    match: [/^[1-9][0-9]{9}$/,
-      `The value of path {PATH} ({VALUE})
-      is not a valid mobile number.`]
+    required: false
+  },
+  token: {
+    type: String,
+    required: false
+  },
+  expires: {
+    type: Number,
+    required: false
   },
   createdAt: {
     type: Date,
@@ -54,6 +59,42 @@ UserSchema.statics = {
         const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
         return Promise.reject(err);
       });
+  },
+
+  findToken(token) {
+    return this.findOne({
+      token
+    })
+    .execAsync()
+    .then((validToken) => {
+      if (validToken) {
+        return Promise.resolve(validToken);
+      }
+      const err = new APIError('The token is not longer valid', httpStatus.UNAUTHORIZED);
+      return Promise.reject(err);
+    });
+  },
+
+  /**
+   * Validate if the user and pass are valids.
+   *
+   * @param  {string} username The user name
+   * @param  {string} pass     The pass
+   * @return {object}          The entire user or an error
+   */
+  login(username, pass) {
+    return this.findOne({
+      username,
+      pass
+    })
+    .execAsync().then((user) => {
+      if (user) {
+        return user;
+      }
+      const err = new APIError('The username/pass combination is incorrect',
+        httpStatus.NOT_FOUND);
+      return Promise.reject(err);
+    });
   },
 
   /**

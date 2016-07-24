@@ -5,13 +5,17 @@ export default {
     create: {
       body: {
         username: Joi.string().required(),
-        mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required()
+        pass: Joi.string(),
+        token: Joi.string(),
+        expires: Joi.number()
       }
     },
     update: {
       body: {
         username: Joi.string().required(),
-        mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required()
+        pass: Joi.string(),
+        token: Joi.string(),
+        expires: Joi.number()
       },
       params: {
         userId: Joi.string().hex().required()

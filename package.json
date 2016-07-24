@@ -10,7 +10,7 @@
     "npm": "3.9.x"
   },
   "scripts": {
-    "start": "gulp serve",
+    "start": "gulp serve | bistre",
     "build": "gulp",
     "lint": "gulp lint",
     "test": "gulp mocha",
@@ -35,12 +35,13 @@
     "API"
   ],
   "dependencies": {
+    "bistre": "^1.0.1",
     "bluebird": "^3.4.1",
     "body-parser": "^1.15.2",
+    "bole": "^3.0.1",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
     "cors": "^2.7.1",
-    "debug": "^2.2.0",
     "express": "^4.14.0",
     "express-validation": "^1.0.0",
     "express-winston": "^1.4.2",
@@ -50,6 +51,7 @@
     "method-override": "^2.3.6",
     "mongoose": "^4.5.3",
     "morgan": "^1.7.0",
+    "random-token": "0.0.8",
     "winston": "^2.2.0"
   },
   "devDependencies": {
@@ -82,6 +84,7 @@
     "gulp-util": "^3.0.7",
     "isparta": "^4.0.0",
     "mocha": "^2.5.3",
+    "proxyquire": "^1.7.10",
     "run-sequence": "^1.2.2",
     "supertest": "^1.2.0",
     "supertest-as-promised": "^3.2.0",
